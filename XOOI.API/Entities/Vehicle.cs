@@ -1,4 +1,4 @@
-﻿namespace XOOI.API.Entity;
+﻿namespace XOOI.API.Entities;
 
 public class Vehicle
 {
@@ -16,4 +16,35 @@ public class Vehicle
 	public VehicleType VehicleType { get; set; }
 	public User User { get; set; }
 	public ICollection<Maintenance> Maintenances { get; set; }
+
+    private Vehicle() { }
+
+    public static Vehicle Create(string plateNo, int vehicleTypeId, int userId, int createdBy)
+    {
+        return new Vehicle
+        {
+            PlateNo = plateNo,
+            VehicleTypeID = vehicleTypeId,
+            UserID = userId,
+            CreatedBy = createdBy,
+            CreateDate = DateTime.UtcNow,
+            IsDeleted = false
+        };
+    }
+
+    public void Modify(string plateNo, int vehicleTypeId, int userId, int modifiedBy)
+    {
+        PlateNo = plateNo;
+        VehicleTypeID = vehicleTypeId;
+        UserID = userId;
+        ModifiedBy = modifiedBy;
+        ModifyDate = DateTime.UtcNow;
+    }
+
+    public void Delete(int modifiedBy)
+    {
+        IsDeleted = true;
+        ModifiedBy = modifiedBy;
+        ModifyDate = DateTime.UtcNow;
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace XOOI.API.Entity;
+﻿namespace XOOI.API.Entities;
 
 public class VehicleType
 {

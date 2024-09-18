@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using XOOI.API.Entity;
+using XOOI.API.Entities;
 
 namespace XOOI.API.Data;
 public class AppDbContext : DbContext
