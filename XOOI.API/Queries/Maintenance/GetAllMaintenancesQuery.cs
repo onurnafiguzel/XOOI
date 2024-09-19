@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using XOOI.API.Data.UnitOfWork;
-using XOOI.API.Repositories.Abstracts;
 
 namespace XOOI.API.Queries.Maintenance;
 
@@ -19,8 +18,8 @@ public class GetAllMaintenancesQueryHandler : IRequestHandler<GetAllMaintenances
 
     public async Task<List<Entities.Maintenance>> Handle(GetAllMaintenancesQuery request, CancellationToken cancellationToken)
     {
-        var maintenanceRepositry = _unitOfWork.GetRepository<IMaintenanceRepository>();
-        var maintenances = await maintenanceRepositry.GetAllAsync();
-        return maintenances.ToList();
+        var maintenanceRepository =  _unitOfWork.GetRepository<Entities.Maintenance>();
+        var maintenances = await maintenanceRepository.GetAllAsync();
+		return maintenances.ToList();
     }
 }

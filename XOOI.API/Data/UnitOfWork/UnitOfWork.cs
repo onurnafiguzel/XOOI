@@ -1,16 +1,15 @@
-﻿using XOOI.API.Repositories.Abstracts;
+﻿using XOOI.API.Data.Repository;
 
 namespace XOOI.API.Data.UnitOfWork;
 
-public class UnitOfWork<TContenxt> : IUnitOfWork
-{
-    private readonly IServiceProvider _serviceProvider;
+public class UnitOfWork : IUnitOfWork
+{   
     private readonly AppDbContext _context;
+	private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
-    public UnitOfWork(AppDbContext context, IServiceProvider serviceProvider)
+	public UnitOfWork(AppDbContext context)
     {
-        _context = context;
-        _serviceProvider = serviceProvider;
+        _context = context;      
     }
 
     public int Commit()
@@ -18,13 +17,27 @@ public class UnitOfWork<TContenxt> : IUnitOfWork
         return _context.SaveChanges();
     }
 
-    public Task<int> CommitAsync(CancellationToken cancellationToken = default)
+    public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
     {
-        return _context.SaveChangesAsync();
+        return await _context.SaveChangesAsync();
     }
 
-    public T GetRepository<T>() where T : IRepository
+	public void Dispose()
+	{
+        _context?.Dispose();
+	}
+
+	public IRepository<T> GetRepository<T>() where T : class
     {
-        return _serviceProvider.GetService<T>();
-    }
+        var type = typeof(T);
+
+		if (!_repositories.ContainsKey(type))
+		{
+			var repositoryType = typeof(Repository<>).MakeGenericType(type);
+			_repositories[type] = Activator.CreateInstance(repositoryType, _context);
+		}
+
+		return (IRepository<T>)_repositories[type];
+
+	}
 }
