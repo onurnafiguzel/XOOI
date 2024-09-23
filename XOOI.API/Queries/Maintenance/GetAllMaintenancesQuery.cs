@@ -19,7 +19,7 @@ public class GetAllMaintenancesQueryHandler : IRequestHandler<GetAllMaintenances
     public async Task<List<Entities.Maintenance>> Handle(GetAllMaintenancesQuery request, CancellationToken cancellationToken)
     {
         var maintenanceRepository =  _unitOfWork.GetRepository<Entities.Maintenance>();
-        var maintenances = await maintenanceRepository.GetAllAsync();
+        var maintenances = await maintenanceRepository.GetListAsync(x => x.IsDeleted == false);
         return maintenances.ToList();
     }
 }

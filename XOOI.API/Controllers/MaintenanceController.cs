@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using XOOI.API.Commands.Maintenance;
 using XOOI.API.Queries.Maintenance;
 
 namespace XOOI.API.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [ApiController]
     [Route("api/[controller]")]
     public class MaintenanceController : ControllerBase
