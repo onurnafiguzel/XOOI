@@ -19,7 +19,7 @@ public class Program
 			options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 		builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-		builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));	
+		builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         builder.Services.AddEndpointsApiExplorer();
 		builder.Services.AddSwaggerGen();

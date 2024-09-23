@@ -45,15 +45,20 @@ namespace XOOI.API.Controllers
 
         // PUT: api/Maintenance/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, [FromBody] MaintenanceEditDto maintenanceDto)
+        public async Task<IActionResult> Edit(int id, [FromBody] MaintenanceEditCommand maintenanceEditCommand)
         {
+            var query = new MaintenanceEditCommand();
+            var result = await mediator.Send(query);
+            return Ok(result);
         }
 
         // DELETE: api/Maintenance/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-
+            var query = new MaintenanceDeleteCommand(id);
+            var result = await mediator.Send(query);
+            return Ok(result);
         }
     }
 }

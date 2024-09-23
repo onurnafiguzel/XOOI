@@ -105,7 +105,7 @@ public class Maintenance
     }
 
     // Method to modify the entity (audit fields should be updated)
-    public void Modify(int modifiedBy, string newDescription, string newLongitude, string newLatitude)
+    public void Modify(int modifiedBy, string newDescription,  string newLongitude, string newLatitude)
     {
         Description = newDescription;
         LocationLongitude = newLongitude;
