@@ -27,6 +27,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 		return await dbContext.Set<TEntity>().ToListAsync();
 	}
 
+	public virtual  IQueryable<TEntity> GetAllAsyncWithInclude()
+	{
+		return dbContext.Set<TEntity>().AsQueryable();
+	}
+
 	public virtual Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> predicate)
 	{
 		return dbContext.Set<TEntity>().AnyAsync(predicate);

@@ -25,33 +25,36 @@ namespace XOOI.API.Controllers
             return Ok(result);
         }
 
-        //// GET: api/Maintenance/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetById(int id)
-        //{
-           
-            
-        //}
+        // GET: api/Maintenance/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var query = new GetMaintenancesByIdQuery();
+			var result = await mediator.Send(query);
+			return Ok(result);
+		}
 
-        //// POST: api/Maintenance
-        //[HttpPost]
-        //public async Task<IActionResult> Create([FromBody] MaintenanceCreateDto maintenanceDto)
-        //{
-           
-        //}
+        // POST: api/Maintenance
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] MaintenanceCreateCommand maintenanceDto)
+        {
+			var query = new MaintenanceCreateCommand();
+			var result = await mediator.Send(query);
+			return Ok(result);
+		}
 
-        //// PUT: api/Maintenance/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Edit(int id, [FromBody] MaintenanceEditDto maintenanceDto)
-        //{
-        //}
+        // PUT: api/Maintenance/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] MaintenanceEditDto maintenanceDto)
+        {
+        }
 
-        //// DELETE: api/Maintenance/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-           
-        //}
+        // DELETE: api/Maintenance/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+        }
     }
 }
 

@@ -49,8 +49,7 @@ public class Maintenance
         int responsibleUserId,
         string locationLongitude,
         string locationLatitude,
-        int pictureGroupId,
-        int createdBy)
+        int pictureGroupId)
     {
         // Validation or business logic can be applied here before entity creation
         if (string.IsNullOrWhiteSpace(description))
@@ -70,7 +69,7 @@ public class Maintenance
             LocationLongitude = locationLongitude,
             LocationLatitude = locationLatitude,
             PictureGroupID = pictureGroupId,
-            CreatedBy = createdBy,
+            CreatedBy = userId,
             CreateDate = DateTime.UtcNow,
             IsDeleted = false // Initially, the entity is not deleted
         };

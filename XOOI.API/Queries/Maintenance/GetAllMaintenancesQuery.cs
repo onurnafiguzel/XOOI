@@ -20,6 +20,6 @@ public class GetAllMaintenancesQueryHandler : IRequestHandler<GetAllMaintenances
     {
         var maintenanceRepository =  _unitOfWork.GetRepository<Entities.Maintenance>();
         var maintenances = await maintenanceRepository.GetAllAsync();
-		return maintenances.ToList();
+        return maintenances.ToList();
     }
 }
